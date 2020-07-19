@@ -16,5 +16,13 @@ public class SillonService {
     public Iterable<Sillon> listAll(){
         return sillonRepository.findAll();
     }
+
+    public void eliminarSillon(long id){
+        sillonRepository.deleteById(id);
+    }
+
+    public Sillon obtenerSillon(long id){
+        return sillonRepository.
+    }
     
 }
