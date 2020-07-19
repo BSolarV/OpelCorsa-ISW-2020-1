@@ -11,13 +11,13 @@ public class Sillon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String descripcion;
-    private String estado;
+    private String estado = "libre";
 
     public String getDescripcion() {
         return this.descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    public void setDescripcion(final String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -25,13 +25,8 @@ public class Sillon {
         return this.estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(final String estado) {
         this.estado = estado;
-    }
-
-	public Sillon(String descripcion, String estado) {
-		this.descripcion = descripcion;
-		this.estado = estado;
     }
 
 
