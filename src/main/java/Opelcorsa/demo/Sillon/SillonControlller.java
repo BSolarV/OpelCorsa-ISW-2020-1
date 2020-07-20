@@ -37,7 +37,6 @@ public class SillonControlller {
     public void deleteSillon(@PathVariable long id) {
         sillonService.eliminarSillon(id);
     }
-<<<<<<< HEAD
 
     @GetMapping(path = "/{id}")
     public Optional<Sillon> getSillon(@PathVariable long id) {
@@ -45,12 +44,8 @@ public class SillonControlller {
     }
 
     @PutMapping(path = "/{id}")
-    public void updateSillon(@PathVariable long id, @RequestBody Sillon sillon){
+    public Sillon updateSillon(@PathVariable long id, @RequestBody Sillon sillon){
         sillonService.obtenerSillon(id).get().setEstado(sillon.getEstado());
+        return sillonService.obtenerSillon(id).get();
     }
-=======
-    
-    
-    
->>>>>>> 9dd398adb18ef3f20379dc18b9f121062083ff4d
 }

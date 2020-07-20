@@ -50,6 +50,4 @@ public class QuimioterapiaController {
 		return new ResponseEntity<Quimioterapia>(nuevo,HttpStatus.CREATED);
 	}
 	
-	
-	
 }
