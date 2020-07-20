@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 
@@ -22,6 +23,7 @@ public class QuimioterapiaController {
 	
 	@Autowired
 	private QuimioterapiaService quimioterapiaService;
+	
 	
 	@GetMapping("")
     public Iterable<Quimioterapia> getSalas (){
@@ -40,16 +42,23 @@ public class QuimioterapiaController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteSala(@RequestBody long id) {
+	public void deleteSala(@PathVariable long id){
 		 quimioterapiaService.eliminarSala(id);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Quimioterapia> updateSala(@RequestBody Quimioterapia quimioterapia){
-		Quimioterapia nuevo = quimioterapiaService.actualizarSala(quimioterapia);
-		return new ResponseEntity<Quimioterapia>(nuevo,HttpStatus.CREATED);
+	public ResponseEntity<Quimioterapia> updateSala(@RequestBody Quimioterapia quimioterapiaDetails, @PathVariable long id ){
+		//Quimioterapia quimioterapia = quimioterapiaRepository.findById(id);
+		//.orElseThrow((Supplier<? extends X>) () -> new ResourceNotFoundException("Employee not found for this id :: " + id));
+		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(id);
+		quimioterapia.setId(quimioterapiaDetails.getId());
+		quimioterapia.setPiso(quimioterapiaDetails.getPiso());
+		quimioterapia.setNumero(quimioterapiaDetails.getNumero());
+		final Quimioterapia updatedQuimioterapia = quimioterapiaService.agregarSala(quimioterapia);
+		
+		
+		return new ResponseEntity<Quimioterapia>(updatedQuimioterapia,HttpStatus.CREATED);
 	}
-	
 	
 	
 }
