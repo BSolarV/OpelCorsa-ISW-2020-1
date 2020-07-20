@@ -25,9 +25,15 @@ public class Sillon {
         return this.estado;
     }
 
-    public void setEstado(final String estado) {
-        this.estado = estado;
+    public void setEstado() {
+        if(this.estado == "libre"){
+            this.estado = "ocupado";
+        }
+        else{
+            this.estado = "libre";
+        }
     }
+    
     public long getId(){
         return this.id;
     }
