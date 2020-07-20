@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface QuimioterapiaRepository extends CrudRepository<Quimioterapia, Long> {
-	Quimioterapia findByID(long id);
+	Quimioterapia findByid(long id);
 	
 }

@@ -26,7 +26,7 @@ public class QuimioterapiaService {
     }
     
     public Quimioterapia actualizarSala(long id){
-    	return quimioterapiaRepository.findByID(id);
+    	return quimioterapiaRepository.findByid(id);
     }
     
     
