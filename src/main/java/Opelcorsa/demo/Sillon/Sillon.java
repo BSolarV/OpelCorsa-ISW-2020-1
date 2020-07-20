@@ -25,13 +25,8 @@ public class Sillon {
         return this.estado;
     }
 
-    public void setEstado() {
-        if(this.estado == "libre"){
-            this.estado = "ocupado";
-        }
-        else{
-            this.estado = "libre";
-        }
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     public long getId(){
