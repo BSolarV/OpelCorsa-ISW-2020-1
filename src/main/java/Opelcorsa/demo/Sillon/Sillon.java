@@ -28,6 +28,9 @@ public class Sillon {
     public void setEstado(final String estado) {
         this.estado = estado;
     }
+    public long getId(){
+        return this.id;
+    }
 
 
 }
