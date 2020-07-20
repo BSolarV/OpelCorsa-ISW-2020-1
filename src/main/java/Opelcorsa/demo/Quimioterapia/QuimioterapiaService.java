@@ -25,7 +25,14 @@ public class QuimioterapiaService {
         return quimioterapiaRepository.save(quimioterapia);
     }
     
+    public Quimioterapia actualizarSala(long id){
+    	return quimioterapiaRepository.findByid(id);
+    }
+    
+    
     public void eliminarSala(long id){
     	quimioterapiaRepository.deleteById(id);
     }
+    
+    
 }
