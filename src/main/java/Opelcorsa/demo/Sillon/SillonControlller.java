@@ -48,9 +48,5 @@ public class SillonControlller {
         sillonService.obtenerSillon(id).get().setEstado(sillon.getEstado());
         return sillonService.obtenerSillon(id).get();
     }
-<<<<<<< HEAD
-=======
-    
-   
->>>>>>> 39b683c0fc0196ff2ddc9f8a99d3b5528e32c110
+
 }

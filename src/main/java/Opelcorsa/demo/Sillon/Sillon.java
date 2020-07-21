@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import Opelcorsa.demo.Quimioterapia.Quimioterapia;
 
 @Entity
 public class Sillon {
@@ -11,9 +15,14 @@ public class Sillon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String descripcion;
-    private String estado = "libre";
+    private String estado;
+    
+    @ManyToOne
+    @JoinColumn(name="id_sala")
+    private Quimioterapia sala;
+    
 
-    public String getDescripcion() {
+	public String getDescripcion() {
         return this.descripcion;
     }
 
@@ -32,6 +41,5 @@ public class Sillon {
     public long getId(){
         return this.id;
     }
-
 
 }
