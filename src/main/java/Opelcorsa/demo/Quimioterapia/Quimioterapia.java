@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import Opelcorsa.demo.Sillon.Sillon;
 
@@ -18,18 +19,9 @@ public class Quimioterapia {
     private int piso;
     private int numero;
     
-    @OneToMany(mappedBy = "quimioterapia")
+    @OneToMany
     private List<Sillon> sillones;
     
-    
-    
-    public Quimioterapia(long id, int piso, int numero, List<Sillon> sillones) {
-		super();
-		this.id = id;
-		this.piso = piso;
-		this.numero = numero;
-		this.sillones = sillones;
-	}
 
 	public List<Sillon> getSillones() {
 		return sillones;
@@ -62,5 +54,12 @@ public class Quimioterapia {
 		this.numero = numero;
 	}
     
+	public void addSillon(Sillon sillon) {
+		this.sillones.add(sillon);
+	}
+	
+	public void removeSillon(Sillon sillon) {
+		this.sillones.remove(sillon);
+	}
 }
 

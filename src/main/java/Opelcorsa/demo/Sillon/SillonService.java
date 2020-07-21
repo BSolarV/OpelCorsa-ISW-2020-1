@@ -27,4 +27,7 @@ public class SillonService {
         return sillonRepository.findById(id);
     }
     
+    public Sillon encontrarSillon(final long id) {
+        return sillonRepository.findByid(id);
+    }
 }
