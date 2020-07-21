@@ -7,21 +7,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import Opelcorsa.demo.Sillon.Sillon;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Quimioterapia {
-    @Id
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private int piso;
     private int numero;
     
-    @OneToMany
+    @OneToMany(mappedBy="sala")
     private List<Sillon> sillones;
-    
 
 	public List<Sillon> getSillones() {
 		return sillones;

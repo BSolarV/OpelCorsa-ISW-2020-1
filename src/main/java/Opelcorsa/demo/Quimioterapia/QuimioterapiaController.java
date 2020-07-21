@@ -2,10 +2,6 @@ package Opelcorsa.demo.Quimioterapia;
 
 import java.util.Optional;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Opelcorsa.demo.Sillon.Sillon;
-import Opelcorsa.demo.Sillon.SillonRepository;
 import Opelcorsa.demo.Sillon.SillonService;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,21 +71,29 @@ public class QuimioterapiaController {
 	
 	@PostMapping("/sillon")
 	public Iterable<Quimioterapia> assingSillonToSala(@RequestBody SalaSillon data) {
-		System.out.println("\n\n\n\n\n\n\n\n***************************\n\n\n\n\n\n\n");
-		System.out.println(data.idSala);
-		System.out.println(data.idSillon);
-		System.out.println("\n\n\n\n\n\n\n\n***************************\n\n\n\n\n\n\n");
-		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.idSala);
-		Sillon sillon = sillonService.encontrarSillon(data.idSillon);
+		
+		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.getIdSala());
+		Sillon sillon = sillonService.encontrarSillon(data.getIdSillon());
+		
 		quimioterapia.addSillon(sillon);
+		quimioterapiaService.agregarSala(quimioterapia);
+		
+		sillon.setSala(quimioterapia);
+		sillonService.agregarSillon(sillon);
+		
         return quimioterapiaService.listAll();
 	}
 
 	@DeleteMapping("/sillon")
-	public Iterable<Quimioterapia> deleteSillonFromSala(long idSala, long idSillon){
-		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(idSala);
-		Sillon sillon = sillonService.encontrarSillon(idSillon);
+	public Iterable<Quimioterapia> deleteSillonFromSala(@RequestBody SalaSillon data){
+		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.getIdSala());
+		Sillon sillon = sillonService.encontrarSillon(data.getIdSillon());
+		
 		quimioterapia.removeSillon(sillon);
+		quimioterapiaService.agregarSala(quimioterapia);
+		
+		sillon.setSala(null);
+		sillonService.agregarSillon(sillon);
         return quimioterapiaService.listAll();
 	}
 }

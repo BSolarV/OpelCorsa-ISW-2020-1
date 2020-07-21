@@ -1,6 +1,7 @@
 package Opelcorsa.demo.Sillon;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,9 +16,9 @@ public class Sillon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String descripcion;
-    private String estado;
+    private String estado = "libre";
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_sala")
     private Quimioterapia sala;
     
@@ -41,5 +42,13 @@ public class Sillon {
     public long getId(){
         return this.id;
     }
+
+	public Quimioterapia getSala() {
+		return sala;
+	}
+
+	public void setSala(Quimioterapia sala) {
+		this.sala = sala;
+	}
 
 }
