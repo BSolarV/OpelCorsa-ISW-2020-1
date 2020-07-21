@@ -67,6 +67,7 @@ public class QuimioterapiaController {
 		return new ResponseEntity<Quimioterapia>(updatedQuimioterapia,HttpStatus.CREATED);
 	}
 	
+<<<<<<< HEAD
 	/*
 	@PostMapping("/sillon")
 	public Iterable<Quimioterapia> assingSillonToSala(long idSala, long idSillon) {
@@ -81,4 +82,6 @@ public class QuimioterapiaController {
 	}*/
 	
 	
+=======
+>>>>>>> 54172e56f13906da379230d4191f240502e38a7b
 }

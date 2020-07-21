@@ -44,9 +44,13 @@ public class SillonControlller {
     }
 
     @PutMapping(path = "/{id}")
-    public void updateSillon(@PathVariable long id, @RequestBody Sillon sillon){
+    public Sillon updateSillon(@PathVariable long id, @RequestBody Sillon sillon){
         sillonService.obtenerSillon(id).get().setEstado(sillon.getEstado());
+        return sillonService.obtenerSillon(id).get();
     }
+<<<<<<< HEAD
+=======
     
    
+>>>>>>> 39b683c0fc0196ff2ddc9f8a99d3b5528e32c110
 }
