@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+//import Opelcorsa.demo.Sillon.SillonService;
+
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -24,6 +27,10 @@ public class QuimioterapiaController {
 	@Autowired
 	private QuimioterapiaService quimioterapiaService;
 	
+	/*
+	@Autowired
+	private SillonService sillonService;
+	*/
 	
 	@GetMapping("")
     public Iterable<Quimioterapia> getSalas (){
@@ -51,7 +58,7 @@ public class QuimioterapiaController {
 		//Quimioterapia quimioterapia = quimioterapiaRepository.findById(id);
 		//.orElseThrow((Supplier<? extends X>) () -> new ResourceNotFoundException("Employee not found for this id :: " + id));
 		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(id);
-		quimioterapia.setId(quimioterapiaDetails.getId());
+		//quimioterapia.setId(quimioterapiaDetails.getId());
 		quimioterapia.setPiso(quimioterapiaDetails.getPiso());
 		quimioterapia.setNumero(quimioterapiaDetails.getNumero());
 		final Quimioterapia updatedQuimioterapia = quimioterapiaService.agregarSala(quimioterapia);
@@ -59,6 +66,19 @@ public class QuimioterapiaController {
 		
 		return new ResponseEntity<Quimioterapia>(updatedQuimioterapia,HttpStatus.CREATED);
 	}
+	
+	/*
+	@PostMapping("/sillon")
+	public Iterable<Quimioterapia> assingSillonToSala(long idSala, long idSillon) {
+		
+        return quimioterapiaService.listAll();
+	}
+
+	@DeleteMapping("/sillon")
+	public Iterable<Quimioterapia> deleteSillonFromSala(long idSala, long idSillon){
+		
+		return quimioterapiaService.listAll();
+	}*/
 	
 	
 }
