@@ -1,12 +1,9 @@
 package Opelcorsa.demo.Quimioterapia;
 
-import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,7 +46,7 @@ public class QuimioterapiaController {
 	@PostMapping("")
 	public ResponseEntity<Quimioterapia> addSala(@RequestBody Quimioterapia quimioterapia){
 		Quimioterapia nuevo = quimioterapiaService.agregarSala(quimioterapia);
-		return new ResponseEntity<Quimioterapia>(nuevo,HttpStatus.CREATED);
+		return new ResponseEntity<Quimioterapia>(nuevo, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")
