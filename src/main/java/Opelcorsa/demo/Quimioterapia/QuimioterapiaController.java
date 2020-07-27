@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import Opelcorsa.demo.Respuesta.Respuesta;
 import Opelcorsa.demo.Sillon.Sillon;
 import Opelcorsa.demo.Sillon.SillonService;
 
@@ -40,8 +42,8 @@ public class QuimioterapiaController {
     }
 	
 	@GetMapping("/{id}")
-	public Optional<Quimioterapia> verSala(long id) {
-		return quimioterapiaService.encontrarSala(id);
+	public Quimioterapia verSala(long id) {
+		return quimioterapiaService.encontrarSala(id).get();
 	}
 	
 	@PostMapping("")
@@ -85,15 +87,19 @@ public class QuimioterapiaController {
 	}
 
 	@DeleteMapping("/sillon")
-	public Iterable<Quimioterapia> deleteSillonFromSala(@RequestBody SalaSillon data){
-		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.getIdSala());
-		Sillon sillon = sillonService.encontrarSillon(data.getIdSillon());
+	public Respuesta deleteSillonFromSala(@RequestBody SalaSillon data){
 		
-		quimioterapia.removeSillon(sillon);
-		quimioterapiaService.agregarSala(quimioterapia);
-		
-		sillon.setSala(null);
-		sillonService.agregarSillon(sillon);
-        return quimioterapiaService.listAll();
+			Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.getIdSala());
+			Sillon sillon = sillonService.encontrarSillon(data.getIdSillon());
+			
+			quimioterapia.removeSillon(sillon);
+			quimioterapiaService.agregarSala(quimioterapia);
+			
+			sillon.setSala(null);
+			sillonService.agregarSillon(sillon);
+			
+			Respuesta respuesta = new Respuesta(true, "Sillón eliminado satisfactoriamente.");
+	        return respuesta;	
 	}
+
 }

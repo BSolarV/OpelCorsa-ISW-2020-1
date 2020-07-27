@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import Opelcorsa.demo.Respuesta.Respuesta;
+
 @RestController
 @RequestMapping("/quimioterapia/sillones")
 public class SillonControlller {
@@ -34,21 +36,23 @@ public class SillonControlller {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteSillon(@PathVariable long id) {
+    public Respuesta deleteSillon(@PathVariable long id) {
         sillonService.eliminarSillon(id);
+        
+        Respuesta respuesta = new Respuesta(true, "Sillon eliminado satisfactoriamente.");
+        return respuesta;
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Sillon> getSillon(@PathVariable long id) {
-        return sillonService.obtenerSillon(id);
+    public Sillon getSillon(@PathVariable long id) {
+        return sillonService.obtenerSillon(id).get();
     }
 
     @PutMapping(path = "/{id}")
     public Sillon updateSillon(@PathVariable long id, @RequestBody Sillon sillon){
-    	Optional<Sillon> sillonFinal = sillonService.obtenerSillon(id);
-    	sillonFinal.get().setEstado(sillon.getEstado());
-    	sillonService.agregarSillon(sillonFinal.get());
+    	Sillon sillonFinal = sillonService.obtenerSillon(id).get();
+    	sillonFinal.setEstado(sillon.getEstado());
+    	sillonService.agregarSillon(sillonFinal);
         return sillonService.obtenerSillon(id).get();
     }
-
 }

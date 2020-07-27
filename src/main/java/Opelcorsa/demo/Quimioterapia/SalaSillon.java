@@ -1,8 +1,10 @@
 package Opelcorsa.demo.Quimioterapia;
 
 public class SalaSillon{
+	
 	private long idSala;
 	private long idSillon;
+	
 	public SalaSillon(long idSala, long idSillon) {
 		super();
 		this.idSala = idSala;
