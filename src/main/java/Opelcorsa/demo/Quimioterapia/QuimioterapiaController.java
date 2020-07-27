@@ -42,7 +42,7 @@ public class QuimioterapiaController {
     }
 	
 	@GetMapping("/{id}")
-	public Quimioterapia verSala(long id) {
+	public Quimioterapia verSala(@PathVariable long id) {
 		return quimioterapiaService.encontrarSala(id).get();
 	}
 	
