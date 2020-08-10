@@ -1,5 +1,7 @@
 package Opelcorsa.demo.Sillon;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,14 +13,17 @@ import javax.persistence.ManyToOne;
 import Opelcorsa.demo.Quimioterapia.Quimioterapia;
 
 @Entity
-public class Sillon {
+public class Sillon implements Serializable{
+
+    private static final long serialVersionUID = 6511717415492391339L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String descripcion;
     private String estado = "libre";
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_sala")
     private Quimioterapia sala;
     

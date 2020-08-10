@@ -1,8 +1,10 @@
 package Opelcorsa.demo.Quimioterapia;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,9 @@ import Opelcorsa.demo.Sillon.Sillon;
 
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class Quimioterapia {
+public class Quimioterapia implements Serializable{
+	
+	private static final long serialVersionUID = -1400007924658747107L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +27,7 @@ public class Quimioterapia {
     private int piso;
     private int numero;
     
-    @OneToMany(mappedBy="sala")
+    @OneToMany(mappedBy="sala", fetch = FetchType.EAGER)
     private List<Sillon> sillones;
 
 	public List<Sillon> getSillones() {

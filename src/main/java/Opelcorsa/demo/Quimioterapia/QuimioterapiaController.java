@@ -78,12 +78,18 @@ public class QuimioterapiaController {
 		Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.getIdSala());
 		Sillon sillon = sillonService.encontrarSillon(data.getIdSillon());
 		
+		if(sillon.getSala() != null){
+			Quimioterapia quimioterapiaTemp = quimioterapiaService.actualizarSala( sillon.getSala().getId() );
+			quimioterapiaTemp.removeSillon(sillon);
+			quimioterapiaService.agregarSala(quimioterapiaTemp);
+			sillon.setSala(null);
+			sillonService.agregarSillon(sillon);
+		}
+
 		quimioterapia.addSillon(sillon);
 		quimioterapiaService.agregarSala(quimioterapia);
-		
 		sillon.setSala(quimioterapia);
 		sillonService.agregarSillon(sillon);
-		
         return quimioterapiaService.listAll();
 	}
 
