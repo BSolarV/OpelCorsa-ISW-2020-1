@@ -103,7 +103,7 @@ public class QuimioterapiaController {
 	}
 
 	@DeleteMapping("/sillon")
-	public Iterable<Quimioterapia> deleteSillonFromSala(@RequestBody SalaSillon data){
+	public Respuesta deleteSillonFromSala(@RequestBody SalaSillon data){
 		
 			Quimioterapia quimioterapia = quimioterapiaService.actualizarSala(data.getIdSala());
 			Sillon sillon = sillonService.encontrarSillon(data.getIdSillon());
@@ -114,6 +114,9 @@ public class QuimioterapiaController {
 			sillon.setSala(null);
 			sillonService.agregarSillon(sillon);
 			
-			return quimioterapiaService.listAll();
+			Respuesta respuesta = new Respuesta(true, "Sillon eliminado satisfactoriamente de Sala.");
+		    return respuesta;
+			
+			//return quimioterapiaService.listAll();
 	}
 }
