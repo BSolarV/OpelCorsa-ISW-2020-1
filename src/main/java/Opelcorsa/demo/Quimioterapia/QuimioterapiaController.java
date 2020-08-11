@@ -52,10 +52,19 @@ public class QuimioterapiaController {
 	
 	@DeleteMapping("/{id}")
 	public Respuesta deleteSala(@PathVariable long id){
-		 quimioterapiaService.eliminarSala(id);
+		Quimioterapia temp = quimioterapiaService.encontrarSala(id).get();
+		if(temp.getSillones() != null) {
+			for (Sillon sillon: temp.getSillones()) {
+				sillon.setSala(null);
+				sillonService.agregarSillon(sillon);
+			}
+		}
+		temp.setSillones(null);
+		quimioterapiaService.agregarSala(temp);
+		quimioterapiaService.eliminarSala(id);
 		 
-		 Respuesta respuesta = new Respuesta(true, "Sala eliminada satisfactoriamente.");
-	     return respuesta;	
+		Respuesta respuesta = new Respuesta(true, "Sala eliminada satisfactoriamente.");
+	    return respuesta;	
 	}
 	
 	@PutMapping("/{id}")
