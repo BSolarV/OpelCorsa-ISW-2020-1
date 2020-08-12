@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import Opelcorsa.demo.Quimioterapia.Quimioterapia;
 
 @Entity
@@ -23,8 +25,9 @@ public class Sillon implements Serializable{
     private String descripcion;
     private String estado = "libre";
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name="id_sala")
+    @JsonIdentityReference(alwaysAsId = true)
     private Quimioterapia sala;
     
 

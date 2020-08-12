@@ -27,7 +27,7 @@ public class Quimioterapia implements Serializable{
     private int piso;
     private int numero;
     
-    @OneToMany(mappedBy="sala", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="sala")
     private List<Sillon> sillones;
 
 	public List<Sillon> getSillones() {
