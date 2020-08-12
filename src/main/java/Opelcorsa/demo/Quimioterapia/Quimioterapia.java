@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 import Opelcorsa.demo.Sillon.Sillon;
 
@@ -25,8 +28,11 @@ public class Quimioterapia implements Serializable{
     private long id;
     private int piso;
     private int numero;
-    
-    @OneToMany(mappedBy="sala")
+	
+	
+	@OneToMany(mappedBy="sala",
+			   fetch = FetchType.EAGER)
+	@OrderBy("id")
     private List<Sillon> sillones;
 
 	public List<Sillon> getSillones() {
@@ -60,11 +66,11 @@ public class Quimioterapia implements Serializable{
 		this.numero = numero;
 	}
     
-	public void addSillon(Sillon sillon) {
+	public void addSillon(final Sillon sillon) {
 		this.sillones.add(sillon);
 	}
-	
-	public void removeSillon(Sillon sillon) {
+
+	public void removeSillon(final Sillon sillon) {
 		this.sillones.remove(sillon);
 	}
 }
